@@ -1,0 +1,35 @@
+extends layouts/header.jade
+
+block content
+			.page-data
+			
+				form(method="post" action="/empresas/edit/#{data[0].id}" class="form-signin")
+					table(cellpadding="11")
+						tr
+							td.label Nombre
+							td 
+								input(type="text" name="empresa" value="#{data[0].empresa}" class="form-control" required)
+						tr
+							td.label Ubicacion
+							td 
+								input(type="text" value="#{data[0].ubicacion}" name="ubicacion" class="form-control" required)
+						tr
+							td.label Telefono
+							td 
+								input(type="number" value="#{data[0].telefono}" name="telefono" class="form-control" required)
+						tr
+							td.label Comentarios
+							td 
+								input(type="text" value="#{data[0].comentarios}" name="comentarios" class="form-control")
+						tr
+							td.label Dominio
+							td 
+								input(type="text" value="#{data[0].dominio}" class="form-control" name="dominio")
+						tr
+							td.label
+							td
+								input(type="submit" name="submit" value="Guardar" class="btn btn-success")
+								&nbsp;&nbsp;
+								input(type="button" name="cancel" value="Cancelar" class="cancel btn btn-danger" onClick="cancelAddEmpresa()")
+							
+			include layouts/footer.jade

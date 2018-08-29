@@ -1,0 +1,63 @@
+extends layouts/header.jade
+
+block content
+			.page-data
+
+				//.data-btn-logout
+					input(type="text" id="buscarEmpleado" onkeypress="empleado(event)" style="float: left; margin-top: 5px; margin-left: 10px; margin-right: 7px;")
+					button(onClick="buscarEmpleado();" class="btn btn-primary" style="float: left;") Buscar
+
+				select(name="filtro" id="orden" onChange="ordenarEmpleado();" style="left: 130px; position: relative; top: 30px;")
+					option(value="todos") Ordenar por...
+					option(value="nombreA") Nombre A - Z
+					option(value="nombreZ") Nombre Z - A
+					option(value="apellidoA") Apellido A - Z
+					option(value="apellidoZ") Apellido Z - A
+					option(value="mailA") mail A - Z
+					option(value="mailZ") mail Z - A
+
+
+				.data-btn-logout
+					button(onClick="addEmpleado();" class="btn btn-warning") Agregar empleado
+
+				.data-table
+					table(class="table" border="1")
+						tr
+							th(scope="col" class="dato") Nombre
+							th(scope="col" class="dato") Apellido
+							th(scope="col" class="dato") Mail
+							th(scope="col" class="dato") Clave Mail
+							th(scope="col" class="dato") Clave Dominio
+							th(scope="col" class="dato") Comentarios
+							th(scope="col" class="dato") Empresa
+							th(scope="col" width="200px" class="dato") Accion
+							
+						if data.length == 0
+							tr
+								td(colspan="8" style="text-align:center") Sin empleados	
+						else
+							for empleado in data.rows
+								tr
+									td(scope="col" class="dato")=empleado.nombre
+									td(scope="col" class="dato")=empleado.apellido
+									td(scope="col" class="dato")=empleado.mail
+									td(scope="col" class="dato")=empleado.clave_mail
+									td(scope="col" class="dato")=empleado.clave_dominio
+									td(scope="col" class="dato")=empleado.comentarios
+									td(scope="col" class="dato")=empleado['empresa.empresa']
+									td(scope="col" class="dato")
+										a(href="../../empleados/edit/#{empleado.id}" class="btn btn-success") Editar
+										&nbsp;&nbsp;
+										a(href="javascript:void(0)" class="btn btn-danger" onclick="borrarEmpleado(#{empleado.id});") Borrar
+
+							//-form(method="post" action="/empleados/F/#{data.rows[0].id}" class="form-signin")	
+							select(name="filtro" id="filtro" onChange="filtrar();" style="margin-top: 7px;")
+								option(value="todas") Filtrar por...
+								for empresa in data.rows2
+									option(value=empresa.id)=empresa.empresa
+							//- &nbsp;&nbsp;
+							//- button(onClick="filtrar(#{filtro});" class="btn btn-primary") Filtrar	
+
+
+
+			include layouts/footer.jade

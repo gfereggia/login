@@ -1,0 +1,23 @@
+doctype html
+html
+	head
+		meta(charset="utf-8")
+		meta(name="viewport" content="width=device-width, initial-scale=1.0")
+		title Corp-Name
+		script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js")
+		script(src="/../js/all.js")
+		link(rel='stylesheet', href='/../css/style.css')
+		link(rel='stylesheet', href='https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css')
+	body
+		
+		#wrapper
+			.navbar
+				div(onClick="window.location.href = '/productos';") Productos
+				div(onClick="window.location.href = '/empresas';") Empresas
+				div(onClick="window.location.href = '/empleados';") Empleados
+				div(onClick="window.location.href = '/cotizador;") Cotizador					
+				div(onClick="window.location.href = '/admin/logout';") Cerrar Sesion
+			.page-header
+				h2.titulo=page_title
+			.page-container
+				block content

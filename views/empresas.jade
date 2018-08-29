@@ -1,0 +1,47 @@
+extends layouts/header.jade
+
+block content
+			.page-data
+
+				.data-btn-logout
+					input(type="text" id="buscarEmpresa" onkeypress="empresa(event)" style="float: left; margin-top: 31px; margin-left: 10px; margin-right: 7px;")
+					button(onClick="buscarEmpresa();" class="btn btn-primary" style="float: left;margin-top: 25px;") Buscar
+				
+				select(name="filtro" id="orden" onChange="ordenarEmpresa();" style="position: relative;top: 32px;")
+					option(value="todos") Ordenar por...
+					option(value="nombreA") Nombre A - Z
+					option(value="nombreZ") Nombre Z - A
+					option(value="ubicacionA") Ubicacion A - Z
+					option(value="ubicacionZ") Ubicacion Z - A
+
+
+				.data-btn-logout
+					button(onClick="addEmpresa();" class="btn btn-warning") Agregar empresa
+
+				.data-table
+					table(class="table" border="1")
+						tr
+							th(scope="col" class="dato") Nombre
+							th(scope="col" class="dato") Ubicacion
+							th(scope="col" class="dato") Telefono
+							th(scope="col" class="dato") Comentarios
+							th(scope="col" class="dato") Dominio
+							th(scope="col" width="200px" class="dato") Accion
+							
+						if data.length == 0
+							tr
+								td(colspan="6" style="text-align:center") Sin empresas
+						else
+							for empresa in data
+								tr
+									td(scope="col" class="dato")=empresa.empresa
+									td(scope="col" class="dato")=empresa.ubicacion
+									td(scope="col" class="dato")=empresa.telefono
+									td(scope="col" class="dato")=empresa.comentarios
+									td(scope="col" class="dato")=empresa.dominio
+									td(scope="col" class="dato")
+										a(href="../../empresas/edit/#{empresa.id}" class="btn btn-success") Editar
+										&nbsp;&nbsp;
+										a(href="javascript:void(0)" class="btn btn-danger" onclick="borrarEmpresa(#{empresa.id});") Borrar
+
+			include layouts/footer.jade

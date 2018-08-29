@@ -1,0 +1,31 @@
+extends layouts/header.jade
+
+block content
+			.page-data
+			
+				form(method="post" action="/productos/add" class="form-signin")
+					table(cellpadding="11")
+						tr
+							td.label Nombre
+							td 
+								input(type="text" name="nombre" class="form-control" required)
+						tr
+							td.label Precio
+							td 
+								input(type="number" name="precio" class="form-control" required)
+						tr
+							td.label Cantidad
+							td 
+								input(type="number" name="cantidad" class="form-control" required)
+						tr
+							td.label Comentarios
+							td 
+								input(type="text" class="form-control"  name="comentarios")
+						tr
+							td.label
+							td
+								input(type="submit" name="submit" value="Guardar" class="btn btn-success")
+								&nbsp;&nbsp;
+								input(type="button" name="cancel" value="Cancelar" class="cancel btn btn-danger" onClick="cancelAdd()")
+							
+			include layouts/footer.jade

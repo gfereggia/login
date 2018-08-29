@@ -1,0 +1,35 @@
+extends layouts/header.jade
+
+block content
+			.page-data
+
+				.data-btn-logout
+					input(type="text" id="buscarUsuario" onkeypress="usuario(event)" style="float: left; margin-top: 5px; margin-left: 10px; margin-right: 7px;")
+					button(onClick="buscarUsuario();" class="btn btn-primary" style="float: left;") Buscar
+
+				.data-btn-logout
+					button(onClick="addUsuario();" class="btn btn-warning") Agregar usuario
+
+				.data-table
+					table(class="table" border="1")
+						tr
+							th(scope="col" class="dato") Usuario
+							th(scope="col" class="dato") Clave
+							th(scope="col" class="dato") Comentarios
+							th(scope="col" width="200px" class="dato") Accion
+							
+						if data.length == 0
+							tr
+								td(colspan="4" style="text-align:center") Sin usuarios
+						else
+							for usuario in data
+								tr
+									td(scope="col" class="dato")=usuario.usuario
+									td(scope="col" class="dato")=usuario.clave
+									td(scope="col" class="dato")=usuario.comentarios
+									td(scope="col" class="dato")
+										a(href="../../usuarios/edit/#{usuario.id}" class="btn btn-success") Editar
+										&nbsp;&nbsp;
+										a(href="javascript:void(0)" class="btn btn-danger" onclick="borrarUsuario(#{usuario.id});") Borrar
+
+			include layouts/footer.jade

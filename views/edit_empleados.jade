@@ -1,0 +1,44 @@
+extends layouts/header.jade
+
+block content
+			.page-data
+			
+				form(method="post" action="/empleados/edit/#{data.rows[0].id}" class="form-signin")
+					table(cellpadding="11")
+						tr
+							td.label Nombre
+							td 
+								input(type="text" name="nombre" value="#{data.rows[0].nombre}" class="form-control" required)
+						tr
+							td.label Apellido
+							td 
+								input(type="text" value="#{data.rows[0].apellido}" name="apellido" class="form-control" required)
+						tr
+							td.label Mail
+							td 
+								input(type="text" value="#{data.rows[0].mail}" name="mail" class="form-control")
+						tr
+							td.label Clave Mail
+							td 
+								input(type="text" value="#{data.rows[0].clave_mail}" name="clave_mail" class="form-control")
+						tr
+							td.label Clave Dominio
+							td 
+								input(type="text" value="#{data.rows[0].clave_dominio}" name="clave_dominio" class="form-control")
+						tr
+							td.label Comentarios
+							td 
+								input(type="text" value="#{data.rows[0].comentarios}" name="comentarios" class="form-control")
+						tr
+							td.label Empresa		
+								select(name='empresa' class="select")
+									for empresa in data.rows2
+										option(value=empresa.id selected="selected")=empresa.empresa
+						tr
+							td.label
+							td
+								input(type="submit" name="submit" value="Guardar" class="btn btn-success")
+								&nbsp;&nbsp;
+								input(type="button" name="cancel" value="Cancelar" class="cancel btn btn-danger" onClick="cancelAddEmpleado()")
+							
+			include layouts/footer.jade

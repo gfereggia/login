@@ -1,0 +1,48 @@
+extends layouts/header.jade
+
+block content
+			.page-data
+
+				.data-btn-logout
+					input(type="text" id="buscarProducto" onkeypress="producto(event)" style="float: left; margin-top: 31px; margin-left: 10px; margin-right: 7px;")
+					button(onClick="buscarProducto();" class="btn btn-primary" style="float: left; margin-top: 25px;") Buscar
+
+				select(name="filtro" id="orden" onChange="ordenarProducto();" style="position: relative;top: 32px;")
+					option(value="todos") Ordenar por...
+					option(value="nombreA") Nombre A - Z
+					option(value="nombreZ") Nombre Z - A
+					option(value="precioMayor") Precio mayor
+					option(value="precioMenor") Precio menor
+					option(value="cantidadMayor") Cantidad mayor
+					option(value="cantidadMenor") Cantidad menor
+
+				.data-btn-logout
+					button(onClick="addUser();" class="btn btn-warning") Agregar producto
+
+				.data-table
+					table(class="table" border="1")
+						tr
+							th(scope="col" class="dato") Nombre
+							th(scope="col" class="dato") Precio
+							th(scope="col" class="dato") Cantidad
+							th(scope="col" class="dato") Comentarios
+							th(scope="col" width="200px" class="dato") Accion
+							
+						if data.length == 0
+							tr
+								td(colspan="5" style="text-align:center") Sin productos
+						else
+							for producto in data
+								tr
+									td(scope="col" class="dato")=producto.nombre
+									td(scope="col" class="dato")=producto.precio
+									td(scope="col" class="dato")=producto.cantidad
+									td(scope="col" class="dato")=producto.comentarios
+									td(scope="col" class="dato")
+										a(href="../../productos/edit/#{producto.id}" class="btn btn-success") Editar 
+										&nbsp;&nbsp;
+										if producto.cantidad > 1
+											a(href="javascript:void(0)" class="btn btn-danger" onclick="deleteCantidad(#{producto.id},#{producto.cantidad});") Borrar
+										else
+											a(href="javascript:void(0)" class="btn btn-danger" onclick="borrarProducto(#{producto.id});") Borrar
+			include layouts/footer.jade
